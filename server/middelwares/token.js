@@ -14,6 +14,8 @@ exports.token = catchAsyncError(async(userid, statuscode,res) =>{
         expires:  new Date(Date.now() + 7 * 24 * 3600000),
         httpOnly: false,
         sameSite: 'lax',
+      domain: 'https://comments-tau-jade.vercel.app',
+      secure: true
       }
       return res.status(statuscode).cookie(String("Memories"), token,option).json({success:true, message:"Login Successfully"})
 })
