@@ -8,14 +8,19 @@ exports.token = catchAsyncError(async(userid, statuscode,res) =>{
   const token =  jwtToken.sign({ id: userid }, process.env.jsonToken, {
         expiresIn: "7d",
       });
-      
-     const option =  {
+       const option = {
         path: '/',
-        expires:  new Date(Date.now() + 7 * 24 * 3600000),
+        expires: new Date(Date.now() + 7 * 24 * 3600000),
         httpOnly: false,
         sameSite: 'lax',
-      domain: 'https://comments-tau-jade.vercel.app'
-      }
+    }
+     // const option =  {
+     //    path: '/',
+     //    expires:  new Date(Date.now() + 7 * 24 * 3600000),
+     //    httpOnly: false,
+     //    sameSite: 'lax',
+     //  domain: 'https://comments-tau-jade.vercel.app'
+     //  }
       return res.status(statuscode).cookie(String("Memories"), token,option).json({success:true, message:"Login Successfully"})
 })
 
