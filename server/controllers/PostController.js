@@ -28,7 +28,7 @@ exports.uploadPost = catchAsyncError(async(req,res, next) =>{
 
 exports.getPost = catchAsyncError(async(req,res, next) =>{
     const {user} = req;
-   
+  
         const post = await Post.find({owner:user});
         if(!post) return next(new ErrorHandler("Someting wrong Happend", 400))
       
@@ -58,9 +58,9 @@ exports.deletePost = catchAsyncError(async(req,res, next) =>{
 })
 
 exports.editPost = catchAsyncError(async(req,res, next) =>{
-
+  
     const newData = {
-      
+       
         title: req.body.title,
         id: req.body._id,
         description: req.body.description,
