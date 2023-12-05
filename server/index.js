@@ -9,7 +9,11 @@ dotenv.config({path:'.env'});
 
 const app = express();
 
-app.use(cors({credentials:true, origin:"https://comments-tau-jade.vercel.app",  methods: "GET,POST,PUT,DELETE", optionsSuccessStatus: 200}))
+app.use(cors({  exposedHeaders: 'Set-Cookie',Headers: true,credentials:true, origin:"https://comments-tau-jade.vercel.app",  methods: "GET,POST,PUT,DELETE", optionsSuccessStatus: 200,allowedHeaders: [
+    'Access-Control-Allow-Origin',
+    'Content-Type',
+    'Authorization'
+  ]}))
 
   
  
