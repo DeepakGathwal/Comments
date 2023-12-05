@@ -11,8 +11,7 @@ exports.token = catchAsyncError(async(userid, statuscode,res) =>{
        const option = {
         path: '/',
         expires: new Date(Date.now() + 7 * 24 * 3600000),
-        httpOnly: false,
-        sameSite: 'lax',
+      httpOnly: true, sameSite: "none", secure: true
     }
      // const option =  {
      //    path: '/',
