@@ -1,80 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { ImReply } from "react-icons/im";
-
-import { imgLink } from '../CommonUrl/URL'
-// show comment on post 
-const Comments = ({ commentBlock,  el,addComment,setAllComments }) => {
-
-  const [edit,setEdit]= useState(-1)
-  const openCommentBox = (id) =>{
- if(id != edit)
-   setEdit(id);
-  else setEdit(-1)
-  }
+import React, {useState} from 'react'
+import { SiApostrophe } from "react-icons/si";
+import '../App.css'
+import { useSelector, useDispatch } from 'react-redux';
+import CreatePostModel from './Models/CreatePostModel';
+import { getUser, logout } from '../redux/action';
+import { imgLink } from '../CommonUrl/URL';
+import { ToastContainer, toast } from 'react-toastify';
 
 
+const NavBar = ({user}) => {
+  const dispatch = useDispatch()
+  const [isopen,setIsOpen] = useState(false)
+  
+ /** logout function */
+const userLogout = async() =>{
+  dispatch(logout)
+  toast('Logout Successfully')
+  window.localStorage.clear()
+ window.location.reload(false)
+}
 
   return (
-    <div className="row">
-      {commentBlock &&
-        commentBlock.map(
-          (ab) => (
-           
-            <>
-              <div className="col-4">
-    <img className='m-1' src={`${imgLink}${ab.userId.image}`} alt='User Profile Pic' style={{borderRadius:"50%", height:"30px", width:'30px'}}/> 
-                <span className="fw-semibold">
-                
-                {ab.userId.fullName}
-                </span>
-              </div>
-                <div className="col-4">
-                <p className="mt-1">{ab.comment}</p>
+    <>
+<div className='container-fluid m-0 p-0'>
+<div className='d-flex flex-row bg-primary justify-content-evenly'>
+   <div className='d-flex flex-row'>
+   <h1 className='text-white '>{user.user.fullName}</h1>
+    <img className='m-2' src={`${imgLink}${user.user.image}`} alt='User Profile Pic' style={{borderRadius:"50%", height:"45px", width:'45px'}}/>
 
-                </div>
-                <div className="col-4" onClick={(e) => openCommentBox(ab._id)}>
-                <span title="Add a reply off this comment" className="mt-1" >  <ImReply /></span>
-
-                </div>
-                {edit == ab._id &&
-                  <>
-
-                
-                  <form action="">
-      <div className=" d-flex flex-column m-auto">
-      <input
-       type="text"
-       className='m-auto me-0  border text-right rounded-2'
-       placeholder="reply  comment"
-       onChange={(e) => setAllComments(e.target.value)}
-     />
-     <input
-     value="Reply"
-       type="submit"
-       className='m-auto me-0 mt-2 border rounded bg-light fw-semibold'
-       onClick={(e, i) => addComment(el, ab.commentId)}
-     />
-
-      </div>
-      </form>
-                </>
-                }
-            
-<div className="ms-5">
-<Comments
-                commentBlock={ab.replay}
-                el={el}
-                addComment={addComment}
-                setAllComments={setAllComments}
-              />
+   </div>
+       <h2 className='text-black mt-1'>Daily Though</h2>
+    <h3 className='addPost' title='Add Post' onClick={() => setIsOpen(true)}><SiApostrophe  title='Add a new Post'  className='mt-3 text-white m-3'/></h3>
+    <button className='text-black border-0  p-2' onClick={() => userLogout()}>Logout</button>
+ </div>
+    <ToastContainer/>
 </div>
-        
-            </>
-          )
-         
-        )  }
-    </div>
-  );
-};
 
-export default Comments;
+<CreatePostModel isopen={isopen} setIsOpen={setIsOpen}/>
+</>
+  )
+
+}
+
+export default NavBar
