@@ -56,47 +56,4 @@ exports.allCommentOffPost = catchAsyncError(async(req,res, next) =>{
         
 })
 
-// exports.viewPost = catchAsyncError(async(req,res, next) =>{
 
-//         const post = await Post.find().populate('owner');
-      
-//         if(!post) return next(new ErrorHandler("Someting wrong Happend", 400))
-//         else return res.status(200).json({status : true,post})
-        
-// })
-
-// exports.deletePost = catchAsyncError(async(req,res, next) =>{
-//     const {id} = req.query;
-//         const post = await Post.findByIdAndDelete({_id : id},  {
-//             runValidators: true,
-//             useFindAndModify: false});
-      
-//         if(!post) return next(new ErrorHandler("Someting wrong Happend", 400))
-//         else return res.status(200).json({status : true,message : "Post Deleted Susscessfully"})
-        
-// })
-
-// exports.editPost = catchAsyncError(async(req,res, next) =>{
-
-//     const newData = {
-      
-//         title: req.body.title,
-//         id: req.body._id,
-//         description: req.body.description,
-        
-//     }
-//         const post = await Post.findById(newData.id);
-     
-//         if(!post) return next(new ErrorHandler("Someting wrong Happend", 400))
-
-//         else {
-//         const data =  await Post.findByIdAndUpdate(newData.id, newData, {
-//             new: true,
-//             runValidators: true,
-//             useFindAndModify: false,
-//         })
-//         await data.save()
-//         return res.status(200).json({status : true,message : "Post Edit Susscessfully"})
-//     }
-        
-// })
