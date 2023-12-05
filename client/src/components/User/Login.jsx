@@ -9,7 +9,7 @@ const Login = () => {
      email: "",  password: ""
     })
     const already = window.localStorage.getItem('Login')
-
+/** condition to show login page */
   useEffect(() =>{
  if(already == "false")
     navigate('/')
