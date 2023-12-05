@@ -3,6 +3,7 @@ import {imgLink, instance} from '../CommonUrl/URL'
 
 const Empty = () => {
     const [post, setPost] = useState([])
+    /** all user post on logout */
 const allData = async() =>{
     const {data} = await instance.get('post/all')
     setPost(data.post)
