@@ -43,7 +43,7 @@ export const createPost  = (inpots) =>  async(dispatch) => {
     try{
    
        dispatch({type:"PostLoading"})
-        const {data} = await instance.post(`post/post`, inpots);
+        const {data} = await instance.post(`post`, inpots);
         
         dispatch({type:"PostSuccess",payload:data})
     }catch(err){
@@ -55,7 +55,7 @@ export const editPost  = (inpots) =>  async(dispatch) => {
     try{
    
        dispatch({type:"PostLoading"})
-        const {data} = await instance.put(`post/post`, inpots);
+        const {data} = await instance.put(`post`, inpots);
         
         dispatch({type:"PostSuccess",payload:data})
     }catch(err){
@@ -66,7 +66,7 @@ export const editPost  = (inpots) =>  async(dispatch) => {
 export const getPosts = async(dispatch) => {
     try{
        dispatch({type:"GetPostLoading"})
-        const {data} = await instance.get(`post/post`);
+        const {data} = await instance.get(`post`);
 
         dispatch({type:"GetPostSuccess",payload:data})
     }catch(err){
