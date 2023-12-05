@@ -9,9 +9,12 @@ const CreatePostModel = ({ isopen, setIsOpen }) => {
   const [inpots, setInputs] = useState({
     title: "", description: "",
   })
+  /** handel inputs */
   const handelChange = async (e) => {
     setInputs({ ...inpots, [e.target.name]: e.target.value })
   }
+
+  /**  add post  */
   const userData = async () => {
     const formData = new FormData()
     formData.append ("title",inpots.title)
@@ -21,7 +24,7 @@ const CreatePostModel = ({ isopen, setIsOpen }) => {
 
 }
  
-  
+  /** add image on body */
   const handelImage = async(e) =>{
     setImg(e.target.files[0])
 }
@@ -32,6 +35,7 @@ const CreatePostModel = ({ isopen, setIsOpen }) => {
       <Modal.Header closeButton>
         <Modal.Title>Add a Post</Modal.Title>
       </Modal.Header>
+       {/* post form  */}
       <form onSubmit={userData}>
         <Modal.Body>
         <Form.Control
