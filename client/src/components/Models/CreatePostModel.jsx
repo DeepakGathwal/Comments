@@ -15,7 +15,8 @@ const CreatePostModel = ({ isopen, setIsOpen }) => {
   }
 
   /**  add post  */
-  const userData = async () => {
+  const userData = async (e) => {
+    e.preventDefault()
     const formData = new FormData()
     formData.append ("title",inpots.title)
     formData.append ("description",inpots.description)
