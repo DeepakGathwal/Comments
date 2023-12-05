@@ -13,7 +13,7 @@ const Registration = () => {
         fullName: "",  email: "",  password: "",  phone: ""
     })
     const already = window.localStorage.getItem('Login')
-
+/** condition to show register page */
     useEffect(() =>{
         if(already == "false")
            navigate('/')
@@ -30,6 +30,8 @@ const Registration = () => {
   const handelImage = async(e) =>{
         setImg(e.target.files[0])
     }
+
+    /** handel form */
     const userData = async (e) => {
         e.preventDefault()
         const formData = new FormData()
@@ -76,7 +78,7 @@ const relocate =() => {
                     type="email"
                     placeholder='Enter Your Email'
                     name='email'
-                    // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     aria-describedby="emailHelp"
                     value={inpots.email}
                     onChange={handelChange} />
@@ -85,7 +87,7 @@ const relocate =() => {
                     type="password"
                     aria-describedby="passwordHelpBlock"
                     placeholder='Enter Your Password'
-                    // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                     name='password'
                     value={inpots.password}
