@@ -11,13 +11,15 @@ const Profile = () => {
 
 
   useEffect(() =>{
+    const userData = async() =>{
+     const data = await  getUser()
+     setuser(data)
+   }
     if(already == "true") userData();
+
+
   },[already])
 
- const userData = async() =>{
-  const data = await  getUser()
-  setuser(data)
-}
 
   if(users && users.status){
   return (

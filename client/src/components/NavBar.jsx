@@ -34,7 +34,7 @@ const userLogout = async() =>{
     <ToastContainer/>
 </div>
 
-{/* <CreatePostModel isopen={isopen} setIsOpen={setIsOpen}/> */}
+<CreatePostModel isopen={isopen} setIsOpen={setIsOpen}/>
 </>
   )
 
