@@ -1,23 +1,24 @@
 import React,{useContext, useEffect, useState} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from '../components/NavBar';
-import { useSelector, useDispatch } from 'react-redux'
-import { ToastContainer, toast } from 'react-toastify';
 import Postes from './Posts';
 import Empty from './empty';
-import { getUser } from '../redux/action';
+import { getUser } from '../CommonUrl/apis';
 
 const Profile = () => {
-  const dispatch = useDispatch()
+ const [users, setuser] = useState([])
   const already = window.localStorage.getItem('Login')
 
-  useEffect(() =>{
-    if(already == "false")
-    dispatch(getUser)
 
+  useEffect(() =>{
+    if(already == "true") userData();
   },[already])
-  const {users} = useSelector((state) => state.profileUser)
- 
+
+ const userData = async() =>{
+  const data = await  getUser()
+  setuser(data)
+}
+
   if(users && users.status){
   return (
     <>

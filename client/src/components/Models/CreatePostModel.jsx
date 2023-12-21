@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
-import { createPost } from '../../redux/action';
+import { createPost } from '../../CommonUrl/apis';
 const CreatePostModel = ({ isopen, setIsOpen }) => {
-  const dispatch = useDispatch()
+ 
   const [img,setImg] = useState([])
   const [inpots, setInputs] = useState({
     title: "", description: "",
@@ -21,7 +21,12 @@ const CreatePostModel = ({ isopen, setIsOpen }) => {
     formData.append ("title",inpots.title)
     formData.append ("description",inpots.description)
     formData.append ("photo",img)
-  await  dispatch(createPost(formData))
+ const data = await createPost(formData)
+ if(data.status == true){
+  setIsOpen(false)
+ }else{
+  setIsOpen(true)
+ }
 
 }
  

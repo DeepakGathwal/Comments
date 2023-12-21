@@ -1,8 +1,7 @@
 import React,{useState, useEffect} from 'react'
 import {Form} from  'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getUser, register } from '../../redux/action'
+import { getUser, register } from '../../CommonUrl/apis'
 import { ToastContainer, toast } from 'react-toastify';
 
 
@@ -15,14 +14,13 @@ const Registration = () => {
     const already = window.localStorage.getItem('Login')
 /** condition to show register page */
     useEffect(() =>{
-        if(already == "false")
+        if(already == true)
            navigate('/')
        
          },[already])
   
-    const dispatch = useDispatch()
     const [img,setImg] = useState([])
-    const message = useSelector((state) => state.register)
+ 
     
     const handelChange = async (e) => {
         setInputs({ ...inpots, [e.target.name]: e.target.value })
@@ -40,15 +38,15 @@ const Registration = () => {
         formData.append("email",inpots.email)
         formData.append ("password",inpots.password)
         formData.append ("photo",img)
-      await  dispatch(register(formData))
+        const data = await register(formData)
+        if(data.success == true){
+            toast(data.message)
+          await getUser()
+            navigate('/')
+           return window.localStorage.setItem("Login",data.success)
+        }
     }
 
-    if (message.loading == false && message.register.success == true) {
-       toast(message.register.message)
-        dispatch(getUser);
-        navigate('/')
-       return window.localStorage.setItem("Login",message.loading)
-    }
   
 const relocate =() => {
     navigate('/login')
@@ -87,7 +85,7 @@ const relocate =() => {
                     type="password"
                     aria-describedby="passwordHelpBlock"
                     placeholder='Enter Your Password'
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                     title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                     name='password'
                     value={inpots.password}
@@ -95,7 +93,7 @@ const relocate =() => {
                 />
                 <Form.Control
                     className='form-control border border-warning  mt-4 p-3 '
-                    type="text"
+                    type="num"
                     placeholder='Enter Phone Number'
                     // pattern='[0-9]{10}'
                     name='phone'

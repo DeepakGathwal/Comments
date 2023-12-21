@@ -1,31 +1,29 @@
 import React, {useState} from 'react'
 import { SiApostrophe } from "react-icons/si";
 import '../App.css'
-import { useSelector, useDispatch } from 'react-redux';
 import CreatePostModel from './Models/CreatePostModel';
-import { getUser, logout } from '../redux/action';
+import {  logout } from '../CommonUrl/apis';
 import { imgLink } from '../CommonUrl/URL';
 import { ToastContainer, toast } from 'react-toastify';
 
 
 const NavBar = ({user}) => {
-  const dispatch = useDispatch()
   const [isopen,setIsOpen] = useState(false)
   
  /** logout function */
 const userLogout = async() =>{
-  dispatch(logout)
+  const data = await logout()
+  if(data.status == true){
   toast('Logout Successfully')
   window.localStorage.clear()
  window.location.reload(false)
-}
-
+}}
   return (
     <>
 <div className='container-fluid m-0 p-0'>
 <div className='d-flex flex-row bg-primary justify-content-evenly'>
    <div className='d-flex flex-row'>
-   <h1 className='text-white '>{user.user.fullName}</h1>
+   <h1 className='text-white '>{user.fullName}</h1>
     <img className='m-2' src={`${imgLink}${user.user.image}`} alt='User Profile Pic' style={{borderRadius:"50%", height:"45px", width:'45px'}}/>
 
    </div>
@@ -36,7 +34,7 @@ const userLogout = async() =>{
     <ToastContainer/>
 </div>
 
-<CreatePostModel isopen={isopen} setIsOpen={setIsOpen}/>
+{/* <CreatePostModel isopen={isopen} setIsOpen={setIsOpen}/> */}
 </>
   )
 

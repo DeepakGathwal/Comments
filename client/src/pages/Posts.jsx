@@ -8,13 +8,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { imgLink, instance } from '../CommonUrl/URL'
 import { Form } from 'react-bootstrap'
-import { addCommentToDatabase, editPost } from '../redux/action';
+import { addCommentToDatabase, editPost } from '../CommonUrl/apis';
 import Comments from '../components/comments';
 
 
 
 const Postes = () => {
-  const dispatch = useDispatch()
 
   const [post, setPost] = useState([])
 
@@ -36,9 +35,10 @@ const Postes = () => {
 
 
     if (giveComment.length == 0) return false
-    dispatch(addCommentToDatabase(el, ab, giveComment))
+  const data = await addCommentToDatabase(el, ab, giveComment)
+  if(data.status == true){
     toast('Comment Added Successfully')
-    showComment(el)
+    showComment(el)}
   }
  
 
@@ -53,11 +53,16 @@ const Postes = () => {
 
   /** adit post */
   const userData = async () => {
-   
-  
-   await dispatch(editPost(inpots))
-   allPosts()
+   const data = await editPost(inpots)
+  if(data.status == true) {
+    allPosts()
     toast('Post Edit Successfully')
+
+  }else{
+    toast(data.message)
+  
+  }
+   
   }
 
   useEffect(() => {

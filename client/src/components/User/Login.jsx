@@ -1,26 +1,22 @@
 import React,{useState, useEffect} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
-import { getUser, login } from '../../redux/action'
+import { getUser, login } from '../../CommonUrl/apis'
 
 const Login = () => {
+    const navigate = useNavigate()
     const [inpots, setInputs] = useState({
      email: "",  password: ""
     })
     const already = window.localStorage.getItem('Login')
 /** condition to show login page */
   useEffect(() =>{
- if(already == "false")
+ if(already == true)
     navigate('/')
 
   },[already])
     
-    
-    
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const message = useSelector((state) => state.login)
+
    
     const handelChange = async (e) => {
         setInputs({ ...inpots, [e.target.name]: e.target.value })
@@ -28,18 +24,19 @@ const Login = () => {
     // Login Function
     const userLogin = async (e) => {
         e.preventDefault()
-        
-        dispatch(login(inpots))
+        const data = await login(inpots)
+        console.log(data);
+        if(data.success == true){
+            toast(data.message)
+          await getUser()
+            navigate('/')
+           return window.localStorage.setItem("Login",data.success)
+        }
+    
     }
    
     // If Login or Regsitation Success then it will navigate on nextPage
-    if (message.loading == false && message.login.success == true) {
-        toast(message.login.message)
-        dispatch(getUser);
-        navigate('/')
-       return window.localStorage.setItem("Login",message.loading)
-    }
-
+  
 const relocate =() => {
     navigate('/register')
 }
