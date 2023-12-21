@@ -39,7 +39,7 @@ exports.getPost = catchAsyncError(async(req,res, next) =>{
 exports.viewPost = catchAsyncError(async(req,res, next) =>{
 
         const post = await Post.find().populate('owner');
-      
+  
         if(!post) return next(new ErrorHandler("Someting wrong Happend", 400))
         
         else return res.status(200).json({status : true,post})

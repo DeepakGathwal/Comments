@@ -5,27 +5,32 @@ const jwt = require('jsonwebtoken')
 const ErrorHandler = require('../utils/Errorhandler');
 const { token } = require('../middelwares/token');
 
+
 // Register a User
 exports.register = catchAsyncerror(async (req, res, next) => {
     const { fullName, phone,  email, password } = req.body;
+ 
     let image = '';
     if(req.file){
         const {filename} = req.file;
         image = `/upload/${filename}`
     }
+    
     const existingUser = await User.findOne({ email })
+ 
     if (existingUser) {
         return next(new ErrorHandler("Profile Already Exist", 401))
     } else {
         const bcryptPass = bcrypt.hashSync(password)
+       
         const user = new User({ email: email, phone: phone, fullName: fullName,  password: bcryptPass,image: image});
-        if (!user) {
+        if (!user) 
             return next(new ErrorHandler("Please fill All fields", 404))
-        }
+
+        res.clearCookie["Memories"]
+        req.cookies["Memories"] = "";
         const userid = user._id
-         res.clearCookie[`${userid}`]
-            req.cookies[`${userid}`] = "";
-        
+   
         await user.save();
       token(userid,200,res) 
       
@@ -48,8 +53,8 @@ exports.login = catchAsyncerror(async (req, res, next) => {
         return next(new ErrorHandler("Email and Password are Invalid", 404))
     } else {
         const userid = user._id;
-        res.clearCookie[`${userid}`]
-        req.cookies[`${userid}`] = "";
+        res.clearCookie["Memories"]
+        req.cookies["Memories"] = "";
       
        token(userid,200,res)
     }
@@ -75,8 +80,8 @@ exports.refreshToken = catchAsyncerror(async (req, res, next) => {
             const token = jwt.sign({ id: userid }, process.env.jsonToken, {
                 expiresIn: "7d",
             });
-            res.clearCookie[`${userid}`]
-            req.cookies[`${userid}`] = "";
+            res.clearCookie["Memories"]
+            req.cookies["Memories"] = "";
             res.cookie(String(userid), token, {
                 path: '/',
                 expires:  new Date(Date.now() + 7 * 14 * 3600000),
@@ -178,8 +183,8 @@ exports.deleteUser = catchAsyncerror(async (req, res, next) => {
         return next(new ErrorHandler("No user found", 400))
 
     } else {
-        res.clearCookie(`${userid}`)
-        req.cookies[`${userid}`] = "";
+        res.clearCookie("Memories")
+        req.cookies["Memories"] = "";
         await user.deleteOne()
         return res.status(200).json({ message: "Profile Delete Successfully" })
     }
