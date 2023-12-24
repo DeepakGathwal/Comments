@@ -29,17 +29,19 @@ app.use(cors({credentials:true, origin:"http://localhost:3000",  methods: "GET,P
   connection();
 
 app.use("/upload", express.static("./upload"))
-if(cluster.isPrimary){
-  console.log(`Primary ${process.pid} is running`);
+// if(cluster.isPrimary){
+//   console.log(`Primary ${process.pid} is running`);
 
-  // Fork workers.
-  for (let i = 0; i < cpus; i++) {
-    cluster.fork();
-  }
-}else{
+//   // Fork workers.
+//   for (let i = 0; i < cpus; i++) {
+//     cluster.fork();
+//   }
+// }else{
   
 
-
+  /**
+   * 
+   */
 
 
 const User = require('./routes/Userroute');
@@ -57,5 +59,5 @@ app.listen(process.env.PORT,() => {
 
 
 
-}
+// }
 

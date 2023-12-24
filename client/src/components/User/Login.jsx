@@ -25,12 +25,13 @@ const Login = () => {
     const userLogin = async (e) => {
         e.preventDefault()
         const data = await login(inpots)
-        console.log(data);
         if(data.success == true){
             toast(data.message)
           await getUser()
             navigate('/')
            return window.localStorage.setItem("Login",data.success)
+        }else  if(data.success == false){
+            toast(data.message)
         }
     
     }
@@ -67,9 +68,9 @@ const relocate =() => {
                 <input className=" blockquote m-5 p-3 rounded-pill toast-header text-white bg-primary ms-auto hover-zoom" type='submit' value="Login" />
 
             </form>
+        <ToastContainer/>
         </div>
         <button className='pe-auto text-black border-0 rounded-pill bg-white text-center p-2' onClick={() => relocate()} >Create Profile</button>
-        <ToastContainer/>
         </div>
     )
 }
