@@ -17,10 +17,9 @@ const Login = () => {
   },[already])
     
 
-   
-    const handelChange = async (e) => {
-        setInputs({ ...inpots, [e.target.name]: e.target.value })
-    }
+  const handelChange = async (e) => {
+    setInputs({ ...inpots, [e.target.name]: e.target.value })
+}
     // Login Function
     const userLogin = async (e) => {
         e.preventDefault()

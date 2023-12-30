@@ -220,3 +220,7 @@ exports.getPasswordEmail = catchAsyncerror(async (req, res, next) => {
    }
 
 })
+
+exports.hello = catchAsyncerror(async(req,res) => {
+    return res.status(200).json({message : "Hello"})
+})
