@@ -2,6 +2,100 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const crypto = require('crypto')
 
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    LoginUser: 
+ *      type: object
+ *      required:
+ *        - email
+ *        - password
+ *      properties:
+ *        email:
+ *         type : String
+ *         default : email@gmail.com
+ *        password:
+ *          type : String
+ *          default : password
+ */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    RegisterUser: 
+ *      type: object
+ *      required:
+ *        - email
+ *        - fullName
+ *        - password
+ *        - image
+ *        - phone
+ *      properties:
+ *        fullName:
+ *         type : String
+ *         default : myName
+ *        email:
+ *         type : String
+ *         default : email@gmail.com
+ *        password:
+ *          type : String
+ *          default : password
+ *        image:
+ *         type : jpg, png
+ *         default : img.
+ *        phone:
+ *          type : Number
+ *          default : 909090909
+ */
+
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    UpdateUser: 
+ *      type: object
+ *      required:
+ *        - email
+ *        - fullName
+ *        - phone
+ *      properties:
+ *        fullName:
+ *         type : String
+ *         default : myName
+ *        email:
+ *         type : String
+ *         default : email@gmail.com
+ *        phone:
+ *          type : Number
+ *          default : 909090909
+ */
+
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    ForgetPassword: 
+ *      type: object
+ *      required:
+ *        - email
+ *        - password
+ *        - repeatpassword
+ *      properties:
+ *        email:
+ *         type : String
+ *         default : email@gmail.com
+ *        password:
+ *          type : String
+ *          default : password
+ *        repeatpassword:
+ *          type : String
+ *          default : password
+ */
+
 
 const userSchema = new mongoose.Schema({
     image:{

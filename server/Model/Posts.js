@@ -1,5 +1,52 @@
 const mongoose = require('mongoose');
 
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    CreatePost: 
+ *      type: object
+ *      required:
+ *        - title
+ *        - description
+ *        - image
+ *      properties:
+ *        title:
+ *         type : String
+ *         default : myName
+ *        description:
+ *         type : String
+ *         default : email@gmail.com
+ *        image:
+ *         type : jpg, png
+ *         default : img.
+ */
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    EditPost: 
+ *      type: object
+ *      required:
+ *        - id
+ *        - title
+ *        - description
+ *        - image
+ *      properties:
+ *        id:
+ *         type : String
+ *         default : _id
+ *        title:
+ *         type : String
+ *         default : myName
+ *        description:
+ *         type : String
+ *         default : email@gmail.com
+ */
+
+
 const Posts = new mongoose.Schema({
     image:{
         type:String,

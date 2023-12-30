@@ -1,5 +1,26 @@
 const mongoose = require('mongoose');
 
+
+/**
+ * @openapi
+ * components:
+ *  schemas:
+ *    AddComment: 
+ *      type: object
+ *      required:
+ *        - comment
+ *        - postId
+ *      properties:
+ *        comment:
+ *         type : String
+ *         default : my first comment
+ *        postId:
+ *         type : String
+ *         default : _id
+ */
+
+
+
 const Comments = new mongoose.Schema({
 
    postId:{
