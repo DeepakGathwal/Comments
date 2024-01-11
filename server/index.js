@@ -27,9 +27,6 @@ app.use(cors({  exposedHeaders: 'Set-Cookie',Headers: true,credentials:true, ori
     'Authorization'
   ]}))
 
-
-  
-  
   connection();
 
 app.use("/upload", express.static("./upload"))
@@ -55,8 +52,8 @@ app.use('/memories/post',Posts)
 
 app.use(ErrorHandler)
 
-app.listen(process.env.PORT,() => {
-  console.log(`Your Server Running on ${process.env.PORT}`);
+app.listen(8080,() => {
+  console.log(`Your Server Running on 8080`);
   createDocs(app )
 })
 }

@@ -4,7 +4,7 @@ const catchAsyncError = require('./catchAsyncError');
 
 
 exports.token = catchAsyncError(async(userid, statuscode,res) =>{
-  const token =  jwtToken.sign({ id: userid }, process.env.jsonToken, {
+  const token =  jwtToken.sign({ id: userid }, "jsonToken", {
         expiresIn: "7d",
       });
     //    const option = {
@@ -34,7 +34,7 @@ exports.token = catchAsyncError(async(userid, statuscode,res) =>{
 
     const token = cookie["Memories"];
 
-  await  jwtToken.verify(String(token), process.env.jsonToken, (err, user) => {
+  await  jwtToken.verify(String(token), "jsonToken", (err, user) => {
         if (err) {
             return next(new ErrorHandler("InValid Token", 404))
         } else {

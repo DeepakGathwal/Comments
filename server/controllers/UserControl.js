@@ -71,13 +71,13 @@ exports.refreshToken = catchAsyncerror(async (req, res, next) => {
         return next(new ErrorHandler("TimeOut Please Login Again", 400))
     }
     const token = cookie.split('=')[1];
-    jwt.verify(String(token), process.env.jsonToken, (err, user) => {
+    jwt.verify(String(token), "jsonToken", (err, user) => {
         if (err) {
             return next(new ErrorHandler("InValid Token", 404))
 
         } else {
             const userid = user._id
-            const token = jwt.sign({ id: userid }, process.env.jsonToken, {
+            const token = jwt.sign({ id: userid }, "jsonToken", {
                 expiresIn: "7d",
             });
             res.clearCookie["Memories"]
