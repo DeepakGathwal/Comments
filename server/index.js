@@ -30,14 +30,14 @@ app.use(cors({  exposedHeaders: 'Set-Cookie',Headers: true,credentials:true, ori
   connection();
 
 app.use("/upload", express.static("./upload"))
-if(cluster.isPrimary){
-  console.log(`Primary ${process.pid} is running`);
+// if(cluster.isPrimary){
+//   console.log(`Primary ${process.pid} is running`);
 
-  // Fork workers.
-  for (let i = 0; i < cpus; i++) {
-    cluster.fork();
-  }
-}else{
+//   // Fork workers.
+//   for (let i = 0; i < cpus; i++) {
+//     cluster.fork();
+//   }
+// }else{
   
 
   
@@ -56,5 +56,5 @@ app.listen(8080,() => {
   console.log(`Your Server Running on 8080`);
   createDocs(app )
 })
-}
+// }
 
